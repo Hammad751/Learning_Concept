@@ -26,13 +26,13 @@
 
 
 
-console.log("Start");
+// console.log("Start");
 
-setTimeout(() => console.log("Timeout"), 0);
+// setTimeout(() => console.log("Timeout"), 0);
 
-Promise.resolve().then(() => console.log("Promise resolved"));
+// Promise.resolve().then(() => console.log("Promise resolved"));
 
-console.log("End");
+// console.log("End");
 
 
 
@@ -75,21 +75,36 @@ console.log("End");
 // │  - I/O operations                          │
 // └────────────────────────────────────────────┘
 
-// console.log('1. Sync');
+function fetchUserFromAPI() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("User data from API");
+        }, 1000);
+    });
+}
+// const user = await fetchUserFromAPI();
 
-// setTimeout(() => {
-//     console.log('2. setTimeout');
-// }, 0);
 
-// Promise.resolve().then(() => {
-//     console.log('3. Promise');
-// });
 
-// process.nextTick(() => {
-//     console.log('4. nextTick');
-// });
+async function test() {
+    console.log('1. Sync');
 
-// console.log('5. Sync');
+    setTimeout(() => {
+        console.log('2. setTimeout');
+    }, 0);
+
+    console.log('3. API Result:', user);
+
+    process.nextTick(() => {
+        console.log('4. nextTick');
+    });
+
+    Promise.resolve().then(() => console.log("Promise resolved"));
+
+    console.log('5. Sync');
+}
+
+test();
 
 
 // Output (in Node.js):
